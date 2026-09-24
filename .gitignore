@@ -1,0 +1,39 @@
+# Local secrets / credentials (review example files before publishing)
+.env
+.env.*
+!.env.example
+.npmrc
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_ed25519
+
+# Installed dependencies and generated test output
+node_modules/
+coverage/
+.nyc_output/
+test-results/
+playwright-report/
+*.log
+
+# Manually exported play records must not be published
+finger-beam-session*.json
+
+# Temporary files and local editor / agent settings
+tmp/
+temp/
+.cache/
+*.tmp
+*.bak
+*.orig
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+.codex/
+.DS_Store
+Thumbs.db
+Desktop.ini
