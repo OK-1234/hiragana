@@ -2,7 +2,7 @@
 const http=require('node:http');
 const fs=require('node:fs');
 const path=require('node:path');
-const files=new Set(['index.html','style.css','core.js','game.js']);
+const files=new Set(['index.html','style.css','core.js','game.js','letters.js','letter-ui.js']);
 const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8'};
 http.createServer((req,res)=>{
   let name;

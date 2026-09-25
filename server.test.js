@@ -29,8 +29,8 @@ test('preview server safely handles public assets and invalid requests',async t=
     assert.equal((await request('//[')).status,400);
     assert.equal((await request('/')).status,200);
   });
-  await t.test('only the four game files are served unchanged',async()=>{
-    for(const file of ['index.html','style.css','core.js','game.js']){
+  await t.test('only the six game files are served unchanged',async()=>{
+    for(const file of ['index.html','style.css','core.js','game.js','letters.js','letter-ui.js']){
       const response=await request('/'+file);
       assert.equal(response.status,200);
       assert.equal(response.body,fs.readFileSync(path.join(__dirname,file),'utf8'));

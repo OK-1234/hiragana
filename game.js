@@ -92,5 +92,11 @@
   $('export').onclick=()=>{const url=URL.createObjectURL(new Blob([JSON.stringify({version:1,records},null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='finger-beam-session.json';a.click();later(()=>URL.revokeObjectURL(url),1000)};
   comment('いっしょに あそぼ！');comment('いけーー！');comment('ここだよ！ ✨');
   setInterval(()=>{if(document.hidden||!['ready','drawing'].includes(phase))return;comment(['いけるいける！','わくわく！','おうえんしてるよ！','ゆっくりで いいよ！'][Math.floor(Math.random()*4)])},6500);
+  // The letter route reuses feedback and this session's log; warm-up stays intact.
+  window.fingerBeamBridge={comment,sound,toast,svgEl,
+    recordLetter:row=>{records.push(row);console.info('[ゆびビーム・もじ]',row);if(!$('debug').hidden)renderDebug()},
+    leaveWarmup:()=>{for(const t of timers)clearTimeout(t);timers.clear();phase='letters';release()},
+    restartWarmup:()=>{run++;index=0;setup()}
+  };
   setup();requestAnimationFrame(animate);
 })();

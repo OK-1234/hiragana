@@ -2,5 +2,5 @@
   "name": "finger-beam-prototype",
   "version": "1.0.0",
   "private": true,
-  "scripts": {"start":"node server.js", "test":"node --test core.test.js game.test.js server.test.js"}
+  "scripts": {"start":"node server.js", "test":"node --test core.test.js game.test.js server.test.js letters.test.js letter-ui.test.js"}
 }

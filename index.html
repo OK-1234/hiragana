@@ -7,7 +7,9 @@
   <title>ゆびで！ビーム — ちいさな宇宙のぼうけん</title>
   <link rel="stylesheet" href="style.css">
   <script defer src="core.js"></script>
+  <script defer src="letters.js"></script>
   <script defer src="game.js"></script>
+  <script defer src="letter-ui.js"></script>
 </head>
 <body>
   <main class="app">
@@ -56,17 +58,30 @@
               <g id="hint" pointer-events="none"><circle r="16" fill="#fff" opacity=".8"/><circle r="9" fill="#c4a5ff"/><circle r="4" fill="white"/></g>
               <circle id="finger" r="14" fill="#fff" stroke="#aa81ff" stroke-width="5" visibility="hidden"/>
             </g>
+            <g id="letter-layer" style="display:none" pointer-events="none">
+              <rect id="letter-paper" x="25" y="242" width="310" height="187" rx="25" fill="#fff" stroke="#d9caee" stroke-width="2" stroke-dasharray="5 7"/>
+              <g id="letter-model"><rect x="-10" y="-8" width="120" height="115" rx="24" fill="#fff6d9" stroke="#f5d992" stroke-width="3"/><path id="letter-model-path" class="letter-stroke" stroke="#8054c8"/><path id="letter-model-light" class="letter-stroke" stroke="#fff" stroke-width="5"/></g>
+              <path id="letter-rail" class="letter-stroke" stroke="#e4d7f6" stroke-width="35"/>
+              <path id="letter-guide" class="letter-stroke" stroke="#bba0dc" stroke-width="3" stroke-dasharray="1 10"/>
+              <path id="letter-ink" class="letter-stroke" stroke="#9769e8" stroke-width="12"/>
+              <g id="letter-start"><circle r="32" fill="#bd9bf1" opacity=".2"/><circle r="23" fill="#9868e7" stroke="white" stroke-width="4"/><path d="M0-10L3-3 10 0 3 3 0 10-3 3-10 0-3-3Z" fill="white"/></g>
+              <circle id="letter-end" r="16" fill="#fff" stroke="#c9b4e7" stroke-width="3"/>
+              <circle id="letter-light" r="10" fill="#fff" stroke="#b88cf3" stroke-width="5"/>
+            </g>
             <g id="effects" pointer-events="none"></g>
             <g class="ground" pointer-events="none"><path d="M0 447Q90 421 182 445T360 442V465H0Z" fill="#e8dff7"/><path d="M0 458Q99 438 196 458T360 452V465H0Z" fill="#dfd4f0"/><path d="M35 449l-4-10M36 449l6-6M320 447l-2-11M321 447l6-6" stroke="#c5b6e0" stroke-width="3" stroke-linecap="round"/></g>
           </svg>
           <div id="toast" class="toast" aria-live="polite"></div>
-          <div id="victory" class="victory" hidden><div class="victory-stars">✦ ★ ✦</div><h1>やったー！</h1><p>モンスターと なかよし！</p><button id="replay">もういっかい <span>↻</span></button></div>
+          <div id="victory" class="victory warmup-result" hidden><div class="victory-stars">✦ ★ ✦</div><h1>やったー！</h1><p>モンスターと なかよし！</p><button id="letter-launch">もじの ほしへ <span>➜</span></button><button id="replay">もういっかい <span>↻</span></button></div>
+          <div id="letter-choices" class="letter-choices" hidden aria-label="敵の弱点の形を選ぶ"></div>
+          <button id="letter-observe" class="letter-observe" hidden aria-label="弱点を見つけた、次へ">✦ <span>➜</span></button>
+          <div id="letter-result" class="victory letter-result" hidden><div class="victory-stars">✦ ★ ✦</div><h1>やったー！</h1><p>ばりあを こわした！</p><div id="letter-trophy"></div><button id="letter-next">つぎの ほしへ ➜</button><button id="letter-warmup" class="secondary-action">はじめの ほしへ ↻</button></div>
         </div>
         <footer class="game-footer"><span class="spark">✧</span><span id="footer-cue">ひかる ほしに さわってみよう</span><span class="footer-stars">✦ · ✧</span></footer>
       </section>
       <aside class="chat-card" aria-label="架空のキャラクターの応援チャット"><div class="chat-heading"><span><i></i> おうえん ひろば</span><span class="chat-symbol">♧</span></div><div id="chat" class="chat" aria-live="off"></div><div class="chat-note">どうぶつたちが おうえんちゅう <span>♡</span><small>ゲーム内の架空のコメントです</small></div></aside>
     </div>
-    <footer class="page-footer"><span>ちいさな ゆびから、おおきな ぼうけん。</span><button id="debug-toggle">保護者・開発用</button></footer>
+    <footer class="page-footer"><span>ちいさな ゆびから、おおきな ぼうけん。</span><button id="letter-exit" hidden>はじめの ほしへ</button><button id="debug-toggle">保護者・開発用</button></footer>
     <section id="debug" class="debug" hidden><h2>操作の記録（このプレイ中のみ）</h2><p>操作の事実を記録します。発達や能力の診断ではありません。画面を閉じると消えます。</p><button id="export">JSONをダウンロード</button><pre id="debug-output"></pre></section>
   </main>
 </body>
